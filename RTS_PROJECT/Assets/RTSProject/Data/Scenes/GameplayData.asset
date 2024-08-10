@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da8a154324d568348832dcb54e95dcad, type: 3}
+  m_Name: GameplayData
+  m_EditorClassIdentifier: 
+  gameplayScenes:
+  - m_AssetGUID: d21ebc5839885744ebe0d6e95d8dc53f
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  - m_AssetGUID: 44de867b216f9bd40b7b3a8063b860e2
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  loadSceneReference:
+    m_AssetGUID: 243940cface5e1943a183d8e8c245e12
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  controllersReference:
+    m_AssetGUID: 53d836fb458cfea41b42b1d6471bdaa9
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  gameplayScenesInOrder:
+  - d21ebc5839885744ebe0d6e95d8dc53f
+  - 44de867b216f9bd40b7b3a8063b860e2
+  loadScene: 243940cface5e1943a183d8e8c245e12
+  controllers: 53d836fb458cfea41b42b1d6471bdaa9
