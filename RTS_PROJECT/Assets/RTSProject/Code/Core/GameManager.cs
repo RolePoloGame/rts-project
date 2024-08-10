@@ -28,10 +28,8 @@ namespace RTS.Core
             await GameSceneManager.LoadScene(data.LoadScene);
             SpawnServiceManager();
             await GameSceneManager.LoadScene(data.ControllersScene);
-            await Task.Delay(2000);
             foreach (var scene in data.GetGameplayScenes())
                 await GameSceneManager.LoadScene(scene);
-            await Task.Delay(2000);
             await GameSceneManager.UnloadScene(data.LoadScene);
         }
 
