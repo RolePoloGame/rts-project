@@ -1,7 +1,10 @@
 {
     "name": "RTS.Agents",
     "rootNamespace": "RTS.Agents",
-    "references": [],
+    "references": [
+        "GUID:fcd79aed28fe45d4e9b4556347119686",
+        "GUID:efa45043feb7e4147a305b73b5cea642"
+    ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,

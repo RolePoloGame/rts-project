@@ -1,7 +1,9 @@
 {
     "name": "RTS.Core",
     "rootNamespace": "RTS.Core",
-    "references": [],
+    "references": [
+        "GUID:a42462926c4e36d418b1f0e8ee43da95"
+    ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
