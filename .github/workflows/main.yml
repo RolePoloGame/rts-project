@@ -1,4 +1,4 @@
-name: GameCI Template 🎮
+name: Build Workflow 🎮
 
 on: push
 
@@ -17,7 +17,6 @@ jobs:
           UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
           UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
         with:
-          projectPath: path/to/your/project
           githubToken: ${{ secrets.GITHUB_TOKEN }}
   buildWindows:
     needs: testRunner
