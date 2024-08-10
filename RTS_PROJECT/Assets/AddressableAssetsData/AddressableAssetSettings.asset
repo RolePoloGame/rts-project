@@ -84,7 +84,8 @@ MonoBehaviour:
   m_LabelTable:
     m_LabelNames:
     - default
-    - Scene
+    - Scenes
+    - ServiceManager
   m_SchemaTemplates: []
   m_GroupTemplateObjects:
   - {fileID: 11400000, guid: 49ffdd14e259657439cb37c7528c26e5, type: 2}

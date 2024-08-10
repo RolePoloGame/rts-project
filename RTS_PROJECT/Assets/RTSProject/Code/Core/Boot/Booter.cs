@@ -1,4 +1,5 @@
-﻿using System;
+﻿using JetBrains.Annotations;
+using System;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
@@ -15,15 +16,16 @@ namespace RTS.Core
             Completed
         }
 
-        public static Task BootTask => bootTask ??= Boot();
-
         public const string BOOTSTRAP_SCENE_NAME = "Bootstrap";
         public const string CORE_SCENE_NAME = "Core";
 
+        public static Task BootTask => bootTask ??= Boot();
         private static Task bootTask;
-        public static bool Booted => bootTask != null && bootTask.IsCompleted;
 
-        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+        public delegate void OnBooterLoadedEvent();
+        public static OnBooterLoadedEvent OnBooterLoaded;
+
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterAssembliesLoaded)]
         private static void LoadFirstScene()
         {
             LogMessage($"Preloading scenes", EBootStepState.Start, true);
@@ -38,6 +40,7 @@ namespace RTS.Core
             {
                 Application.targetFrameRate = 60;
                 await BootTask;
+                OnBooterLoaded?.Invoke();
             }
             catch (Exception e)
             {
@@ -54,15 +57,9 @@ namespace RTS.Core
 
         private static async Task LoadBootstrap()
         {
-            var globalBootstrapLoad = Addressables.LoadSceneAsync(BOOTSTRAP_SCENE_NAME, LoadSceneMode.Additive); ;
-
-            LogMessage($"{BOOTSTRAP_SCENE_NAME} scene loading... [{Time.time:F2}]", EBootStepState.InProgress);
-
-            while (!globalBootstrapLoad.IsDone)
-            {
-                await Task.Delay(20);
-            }
-            LogMessage($"{BOOTSTRAP_SCENE_NAME} scene loading... [{Time.time:F2}]", EBootStepState.Completed);
+            LogMessage($"{BOOTSTRAP_SCENE_NAME} initialization... [{Time.time:F4}]", EBootStepState.InProgress);
+            await GameSceneManager.LoadScene(BOOTSTRAP_SCENE_NAME);
+            LogMessage($"{BOOTSTRAP_SCENE_NAME} initialized [{Time.time:F4}]", EBootStepState.Completed);
         }
 
         private static void LogMessage(string message, EBootStepState state, bool greatStep = false)
