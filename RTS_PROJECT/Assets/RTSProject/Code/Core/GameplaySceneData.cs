@@ -17,10 +17,8 @@ namespace RTS.Core
         [SerializeField] private AssetReference loadSceneReference;
         [SerializeField] private AssetReference controllersReference;
 
-        //private void OnValidate()
-        //{ 
-        //    SerializeReferences();
-        //}
+        private void OnValidate() => SerializeReferences();
+
         [Button("Reserialize", EButtonEnableMode.Editor)]
         private void SerializeReferences()
         {
@@ -35,9 +33,9 @@ namespace RTS.Core
             AssetDatabase.SaveAssetIfDirty(this);
         }
 #endif
-        [SerializeField] protected List<string> gameplayScenesInOrder = new();
-        [SerializeField] private string loadScene;
-        [SerializeField] private string controllers;
+        [SerializeField, ReadOnly] protected List<string> gameplayScenesInOrder = new();
+        [SerializeField, ReadOnly] private string loadScene;
+        [SerializeField, ReadOnly] private string controllers;
 
         public string LoadScene => loadScene;
         public string ControllersScene => controllers;

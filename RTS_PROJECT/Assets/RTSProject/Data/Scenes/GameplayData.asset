@@ -17,6 +17,10 @@ MonoBehaviour:
     m_SubObjectName: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0
+  - m_AssetGUID: 44de867b216f9bd40b7b3a8063b860e2
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
   loadSceneReference:
     m_AssetGUID: 243940cface5e1943a183d8e8c245e12
     m_SubObjectName: 
@@ -29,5 +33,6 @@ MonoBehaviour:
     m_EditorAssetChanged: 0
   gameplayScenesInOrder:
   - d21ebc5839885744ebe0d6e95d8dc53f
+  - 44de867b216f9bd40b7b3a8063b860e2
   loadScene: 243940cface5e1943a183d8e8c245e12
   controllers: 53d836fb458cfea41b42b1d6471bdaa9

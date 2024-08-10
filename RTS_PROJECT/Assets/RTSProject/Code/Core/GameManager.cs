@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
@@ -26,17 +27,10 @@ namespace RTS.Core
         public static async void InitializeGameplay(GameplaySceneData data)
         {
             await GameSceneManager.LoadScene(data.LoadScene);
-            SpawnServiceManager();
             await GameSceneManager.LoadScene(data.ControllersScene);
             foreach (var scene in data.GetGameplayScenes())
                 await GameSceneManager.LoadScene(scene);
             await GameSceneManager.UnloadScene(data.LoadScene);
-        }
-
-        private static void SpawnServiceManager()
-        {
-            var prefab = Addressables.LoadAssetAsync<ServiceManager>(nameof(ServiceManager)).WaitForCompletion();
-            Addressables.InstantiateAsync(prefab).WaitForCompletion();
         }
         #endregion
     }

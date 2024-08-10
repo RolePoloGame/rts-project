@@ -1,10 +1,8 @@
+using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
-using UnityEngine.AddressableAssets.ResourceLocators;
 using UnityEngine.ResourceManagement.ResourceProviders;
 using UnityEngine.SceneManagement;
 
@@ -13,12 +11,12 @@ namespace RTS.Core
     public static class GameSceneManager
     {
         public static Dictionary<string, SceneInstance> loadedScenes = new();
-        public static async Task LoadScene(string name)
+        public static async Task LoadScene(string name, LoadSceneMode mode = LoadSceneMode.Additive)
         {
             if (string.IsNullOrEmpty(name)) return;
             Debug.Log($"[{nameof(GameSceneManager)}] {name.Bold()} is loading...".Italic());
 
-            var handle = Addressables.LoadSceneAsync(name, LoadSceneMode.Additive);
+            var handle = Addressables.LoadSceneAsync(name, mode);
 
             while (!handle.IsDone)
             {
@@ -39,6 +37,13 @@ namespace RTS.Core
             loadedScenes.Remove(name);
 
             Debug.Log($"[{nameof(GameSceneManager)}] {name.Bold()} unloaded.");
+        }
+
+        public static void SetActive(string scene)
+        {
+            if (string.IsNullOrEmpty(scene)) return;
+            if (!loadedScenes.ContainsKey(scene)) return;
+            SceneManager.SetActiveScene(loadedScenes[scene].Scene);
         }
     }
 }

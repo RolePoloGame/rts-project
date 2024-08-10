@@ -29,7 +29,7 @@ namespace RTS.Core
         private static void LoadFirstScene()
         {
             LogMessage($"Preloading scenes", EBootStepState.Start, true);
-            Addressables.LoadSceneAsync(CORE_SCENE_NAME, LoadSceneMode.Single).WaitForCompletion();
+            GameSceneManager.LoadScene(CORE_SCENE_NAME, LoadSceneMode.Single);
             LogMessage($"Preloading finished", EBootStepState.Completed, true);
         }
 
