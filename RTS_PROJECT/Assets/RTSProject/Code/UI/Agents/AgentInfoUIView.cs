@@ -33,12 +33,6 @@ namespace RTS.UI
             service.OnAgentArrived += OnAgentArrived;
         }
 
-        public void RequestSpawn()
-        {
-            if (service == null) return;
-            service.RequestSpawnAgent();
-        }
-
         private void OnAgentSpawned(UniqueID id)
         {
             SpawnNotice($"[{id}] was added");

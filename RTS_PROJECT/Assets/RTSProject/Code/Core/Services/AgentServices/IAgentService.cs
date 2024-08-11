@@ -10,5 +10,7 @@ namespace RTS.Core
         public event Action<UniqueID> OnAgentArrived;
         public void RequestSpawnAgent();
         public void RequestRemoveAgent(UniqueID entityID);
+        public void RequestRemoveAllAgents();
+        public int AgentCount { get; }
     }
 }
