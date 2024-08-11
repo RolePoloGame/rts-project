@@ -166,7 +166,7 @@ namespace RTS.Agents
 
         private void UpdateTweens()
         {
-            movementStarts = speedFactor > 0;
+            movementStarts = hasPath && speedFactor > 0;
 
             if (moveTween != null)
             {

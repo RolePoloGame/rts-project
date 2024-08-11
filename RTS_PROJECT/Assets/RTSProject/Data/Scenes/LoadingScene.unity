@@ -133,7 +133,6 @@ GameObject:
   m_Component:
   - component: {fileID: 404775953}
   - component: {fileID: 404775952}
-  - component: {fileID: 404775951}
   - component: {fileID: 404775954}
   m_Layer: 0
   m_Name: UICamera
@@ -142,14 +141,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &404775951
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 404775950}
-  m_Enabled: 1
 --- !u!20 &404775952
 Camera:
   m_ObjectHideFlags: 0
@@ -393,7 +384,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
   m_SortingOrder: 999
   m_TargetDisplay: 0
