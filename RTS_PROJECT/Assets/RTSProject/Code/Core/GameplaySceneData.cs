@@ -33,9 +33,9 @@ namespace RTS.Core
             AssetDatabase.SaveAssetIfDirty(this);
         }
 #endif
-        protected List<string> gameplayScenesInOrder = new();
-        private string loadScene;
-        private string controllers;
+        [SerializeField] protected List<string> gameplayScenesInOrder = new();
+        [SerializeField] private string loadScene;
+        [SerializeField] private string controllers;
 
         public string LoadScene => loadScene;
         public string ControllersScene => controllers;

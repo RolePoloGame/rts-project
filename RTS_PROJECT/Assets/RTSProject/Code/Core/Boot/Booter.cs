@@ -1,8 +1,6 @@
-﻿using JetBrains.Annotations;
-using System;
+﻿using System;
 using System.Threading.Tasks;
 using UnityEngine;
-using UnityEngine.AddressableAssets;
 using UnityEngine.SceneManagement;
 
 namespace RTS.Core
@@ -29,6 +27,7 @@ namespace RTS.Core
         private static void LoadFirstScene()
         {
             LogMessage($"Preloading scenes", EBootStepState.Start, true);
+            //TODO: Implement Synchronous valterantive
             GameSceneManager.LoadScene(CORE_SCENE_NAME, LoadSceneMode.Single);
             LogMessage($"Preloading finished", EBootStepState.Completed, true);
         }
