@@ -2,10 +2,6 @@
 
 This project was developed as part of a job interview task, focusing on implementing a Real-Time Strategy (RTS) game using Unity. The main objective was to create functionalities for spawning, managing, and controlling agents within the game.
 
-## Project Overview
-
-The project demonstrates a basic RTS game where agents are spawned and managed according to specific guidelines. It also showcases the use of various Unity packages to enhance game features and performance.
-
 ## Completed Tasks
 
 - [x] **Scene Setup:**
@@ -33,13 +29,12 @@ The project demonstrates a basic RTS game where agents are spawned and managed a
 - **Basic Motions Free:** For agent animations.
 
 ## Planned Features
-
 - [ ] Full player controller.
+- [ ] Improved AI for agents.
 - [ ] Improved and detailed UI.
 - [ ] Selection and designation of actions for Agents.
-- [ ] Improved AI for agents.
 - [ ] Building system and resource gathering.
-
+- and more...
 ## Resources
 
 - [Space Robot Kyle URP](https://assetstore.unity.com/packages/3d/characters/robots/space-robot-kyle-urp-4696)
@@ -47,5 +42,3 @@ The project demonstrates a basic RTS game where agents are spawned and managed a
 - [A* Pathfinding Project](https://arongranberg.com/astar/download)
 - [A* Pathfinding Project](https://arongranberg.com/astar/download)
 - [Basic Motions Free](https://assetstore.unity.com/packages/3d/animations/basic-motions-free-154271)
-
-This README provides an overview of the project, including the tasks completed and packages used. The project aims to demonstrate proficiency in Unity and adherence to task specifications while showcasing the ability to incorporate advanced features for enhanced gameplay experience.
