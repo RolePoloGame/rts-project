@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 namespace RTS.Agents
 {
     public class AgentManager : Singleton<AgentManager>, IAgentService
@@ -13,18 +14,16 @@ namespace RTS.Agents
         public event Action<UniqueID> OnAgentArrived;
 
         [SerializeField] private Dictionary<UniqueID, Agent> spawnedAgents = new();
-
+        [SerializeField] private GameObject prefab;
         public override void Initialize()
         {
             base.Initialize();
             RegisterAgentService();
         }
-
         private void OnDestroy()
         {
             RemoveAgentService();
         }
-
 
         protected virtual void HandleAgentRemove(UniqueID entityID)
         {
@@ -42,8 +41,8 @@ namespace RTS.Agents
 
         private Agent SpawnNewAgent()
         {
-            //TODO: Instantiate Agent
-            return null;
+            var instance = Instantiate(prefab, null);
+            return instance.GetComponent<Agent>();
         }
 
 
@@ -56,6 +55,15 @@ namespace RTS.Agents
             HandleAgentRemove(entityID);
             OnAgentRemoved?.Invoke(entityID);
         }
+
+        public void SetSpeed(float speed)
+        {
+            foreach (var agent in spawnedAgents.Values)
+            {
+                agent.ChangeSpeed(speed);
+            }
+        }
+
 
         public void RequestSpawnAgent()
         {
