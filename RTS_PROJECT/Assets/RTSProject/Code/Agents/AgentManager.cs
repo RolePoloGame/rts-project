@@ -18,11 +18,11 @@ namespace RTS.Agents
         public override void Initialize()
         {
             base.Initialize();
-            RegisterAgentService();
+            RegisterService();
         }
         private void OnDestroy()
         {
-            RemoveAgentService();
+            RemoveService();
         }
 
         protected virtual void HandleAgentRemove(UniqueID entityID)
@@ -47,8 +47,8 @@ namespace RTS.Agents
 
 
         #region IAgentService
-        public void RegisterAgentService() => ServiceManager.Instance.Register(this);
-        public void RemoveAgentService() => ServiceManager.Instance.Remove(this);
+        public void RegisterService() => ServiceManager.Instance.Register(this);
+        public void RemoveService() => ServiceManager.Instance.Remove(this);
 
         public void RequestRemoveAgent(UniqueID entityID)
         {
