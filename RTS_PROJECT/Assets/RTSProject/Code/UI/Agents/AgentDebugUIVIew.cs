@@ -1,8 +1,9 @@
 using RTS.Core;
+using UnityEngine;
 
 namespace RTS.UI
 {
-    public class AgentDebugUIVIew : ServiceUIView<IAgentService>
+    public class AgentDebugUIView : ServiceUIView<IAgentService>
     {
         public void OnRequestSpawn()
         {
@@ -19,6 +20,9 @@ namespace RTS.UI
             if (service == null) return;
             service.RequestRemoveAllAgents();
         }
-
+        public void Quit()
+        {
+            Application.Quit();
+        }
     }
 }
