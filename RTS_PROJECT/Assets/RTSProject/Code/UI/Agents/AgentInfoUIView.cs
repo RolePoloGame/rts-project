@@ -6,7 +6,7 @@ using UnityEngine.Pool;
 
 namespace RTS.UI
 {
-    public class AgentInfoUIView : UIView
+    public class AgentInfoUIView : ServiceUIView<IAgentService>
     {
         [SerializeField] private TextMeshProUGUI amountTMP;
 
@@ -17,12 +17,10 @@ namespace RTS.UI
 
 
         private ObjectPool<AgentUIElement> pool;
-        private IAgentService service;
 
         private void OnEnable()
         {
             pool = new ObjectPool<AgentUIElement>(CreateElement);
-            service = ServiceManager.Instance.Get<IAgentService>();
             if (service == null)
             {
                 Debug.LogError($"There is no service of type {nameof(IAgentService)}");
@@ -31,6 +29,13 @@ namespace RTS.UI
             service.OnAgentSpawned += OnAgentSpawned;
             service.OnAgentRemoved += OnAgentRemoved;
             service.OnAgentArrived += OnAgentArrived;
+        }
+
+        private void OnDisable()
+        {
+            service.OnAgentSpawned -= OnAgentSpawned;
+            service.OnAgentRemoved -= OnAgentRemoved;
+            service.OnAgentArrived -= OnAgentArrived;
         }
 
         private void OnAgentSpawned(UniqueID id)
@@ -61,14 +66,6 @@ namespace RTS.UI
             pool.Release(obj);
             obj.gameObject.SetActive(false);
         }
-
-        private void OnDisable()
-        {
-            service.OnAgentSpawned -= OnAgentSpawned;
-            service.OnAgentRemoved -= OnAgentSpawned;
-        }
-
-
         private AgentUIElement CreateElement()
         {
             return Instantiate(elementPrefab, root);

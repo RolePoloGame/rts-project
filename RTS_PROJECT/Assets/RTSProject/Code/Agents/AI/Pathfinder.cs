@@ -42,7 +42,11 @@ namespace RTS.Agents
             if (!RandomMovement) return;
             SearchForPath();
         }
-
+        private void OnDestroy()
+        {
+            if (moveTween != null) moveTween.Kill();
+            if (rotateTween != null) rotateTween.Kill();
+        }
         private void HandleMovement()
         {
             if (!Arrived()) return;
@@ -76,7 +80,6 @@ namespace RTS.Agents
             var speed = MovementSpeed * speedFactor;
             distance += distance * angularDeceleration / RotationSpeed;
             float duration = distance / speed;
-            Debug.Log($"{distance}/{speed} with {angularDeceleration}");
             moveTween = transform.DOMove(nextPos, duration).SetEase(GetEase());
         }
         private float GetAngularDecelerationRate()
