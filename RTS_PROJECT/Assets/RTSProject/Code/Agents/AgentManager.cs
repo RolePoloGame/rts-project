@@ -22,12 +22,12 @@ namespace RTS.Agents
         {
             base.Initialize();
             RegisterService();
-            ServiceManager.Instance.Get<ITickService>().OnTickChanged += SetTickSpeed;
+            ServiceManager.Get<ITickService>().OnTickChanged += SetTickSpeed;
         }
         private void OnDestroy()
         {
             RemoveService();
-            ServiceManager.Instance.Get<ITickService>().OnTickChanged -= SetTickSpeed;
+            ServiceManager.Get<ITickService>().OnTickChanged -= SetTickSpeed;
         }
 
         protected virtual void HandleAgentRemove(UniqueID entityID)
@@ -43,6 +43,8 @@ namespace RTS.Agents
         {
             var agent = SpawnNewAgent();
             if (agent == null) return null;
+            agent.OnArrived += OnAgentArrived;
+            agent.ChangeSpeed(ServiceManager.Get<ITickService>().TickRate);
             spawnedAgents.Add(agent.Data.ID, agent);
             return agent;
         }
@@ -60,12 +62,12 @@ namespace RTS.Agents
             {
                 agent.ChangeSpeed(newSpeed);
             }
-        } 
+        }
         #endregion
 
         #region IAgentService
-        public void RegisterService() => ServiceManager.Instance.Register(this);
-        public void RemoveService() => ServiceManager.Instance.Remove(this);
+        public void RegisterService() => ServiceManager.Register(this);
+        public void RemoveService() => ServiceManager.Remove(this);
 
         public void RequestRemoveAgent(UniqueID entityID)
         {

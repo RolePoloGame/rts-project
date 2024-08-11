@@ -1,27 +1,29 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 
 namespace RTS.Core
 {
-    public class ServiceManager : Singleton<ServiceManager>
+    public static class ServiceManager
     {
-        private List<IService> services = new();
+        private static readonly List<IService> services = new();
 
-        public T Get<T>() where T : IService => (T)services.FirstOrDefault(x => x is T);
-
-        public override void Initialize()
+        public static T Get<T>() where T : IService
         {
-            base.Initialize();
-            services = new();
+            T service = (T)services.FirstOrDefault(x => x is T);
+            if (service == null)
+            {
+                Debug.LogError($"Cannot find {nameof(IService)} of type {typeof(T)}. Did you forget to register?");
+            }
+            return service;
         }
 
-        public void Register(IService service)
+        public static void Register(IService service)
         {
             if (services.Contains(service)) return;
             services.Add(service);
         }
-        public void Remove(IService service)
+        public static void Remove(IService service)
         {
 
             if (!services.Contains(service)) return;

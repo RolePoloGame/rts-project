@@ -4,13 +4,22 @@
     {
         public event TickRateChangeEvent OnTickChanged;
 
-        private ETickRate currentRate;
+        private ETickRate currentRate = ETickRate.Pause;
         public float TickRate => GetTickRate(currentRate);
 
         private float GetTickRate(ETickRate tickRate) => (float)tickRate;
+        public override void Initialize()
+        {
+            base.Initialize();
+            RegisterService();
+        }
+        private void OnDestroy()
+        {
+            RemoveService();
+        }
 
-        public void RegisterService() => ServiceManager.Instance.Register(this);
-        public void RemoveService() => ServiceManager.Instance.Remove(this);
+        public void RegisterService() => ServiceManager.Register(this);
+        public void RemoveService() => ServiceManager.Remove(this);
 
         public void SetTickRate(ETickRate newRate)
         {

@@ -4,5 +4,5 @@
     {
         public void RegisterService();
         public void RemoveService();
-    }
+    };
 }

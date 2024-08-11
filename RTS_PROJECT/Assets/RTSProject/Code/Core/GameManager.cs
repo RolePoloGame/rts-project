@@ -27,6 +27,7 @@ namespace RTS.Core
         public static async void InitializeGameplay(GameplaySceneData data)
         {
             await GameSceneManager.LoadScene(data.LoadScene);
+
             await GameSceneManager.LoadScene(data.ControllersScene);
             foreach (var scene in data.GetGameplayScenes())
                 await GameSceneManager.LoadScene(scene);
