@@ -32,7 +32,7 @@ namespace RTS.Core
             foreach (var scene in data.GetGameplayScenes())
                 await GameSceneManager.LoadScene(scene);
 
-            GameSceneManager.SetActive(data.GetGameplayScenes()[^1]);
+            GameSceneManager.SetActive(data.GetGameplayScenes()[0]);
             await GameSceneManager.UnloadScene(data.LoadScene);
         }
         #endregion
