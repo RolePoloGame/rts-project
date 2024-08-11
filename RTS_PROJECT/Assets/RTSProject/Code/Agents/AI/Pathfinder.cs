@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using RTS.Core;
 using DG.Tweening;
+using System;
 
 namespace RTS.Agents
 {
@@ -29,6 +30,8 @@ namespace RTS.Agents
 
         public bool ReachedDestination => reachedDestination;
 
+        public event Action OnArrvied;
+
         /// <summary>Updates the AI's destination every frame</summary>
         void Update()
         {
@@ -42,12 +45,17 @@ namespace RTS.Agents
             if (!RandomMovement) return;
             SearchForPath();
         }
-
+        private void OnDestroy()
+        {
+            if (moveTween != null) moveTween.Kill();
+            if (rotateTween != null) rotateTween.Kill();
+        }
         private void HandleMovement()
         {
-            if (!Arrived()) return;
+            if (!ReachedStep()) return;
             if (currentPath == null || currentPath.Count == 0)
             {
+                OnArrvied?.Invoke();
                 hasPath = false;
                 return;
             }
@@ -76,7 +84,6 @@ namespace RTS.Agents
             var speed = MovementSpeed * speedFactor;
             distance += distance * angularDeceleration / RotationSpeed;
             float duration = distance / speed;
-            Debug.Log($"{distance}/{speed} with {angularDeceleration}");
             moveTween = transform.DOMove(nextPos, duration).SetEase(GetEase());
         }
         private float GetAngularDecelerationRate()
@@ -97,7 +104,7 @@ namespace RTS.Agents
             return Ease.Linear;
         }
 
-        private bool Arrived() => reachedDestination = Vector3.Distance(nextPos, transform.position) <= reachedDistance;
+        private bool ReachedStep() => reachedDestination = Vector3.Distance(nextPos, transform.position) <= reachedDistance;
 
         private void SearchForPath()
         {
@@ -112,8 +119,8 @@ namespace RTS.Agents
 
         private Vector3 GetRandomPoint()
         {
-            var theta = Random.Range(-Mathf.PI, Mathf.PI);
-            var radius = Random.Range(15.0f, 25.0f);
+            var theta = UnityEngine.Random.Range(-Mathf.PI, Mathf.PI);
+            var radius = UnityEngine.Random.Range(15.0f, 25.0f);
             var x = radius * Mathf.Cos(theta);
             var z = radius * Mathf.Sin(theta);
             return new Vector3(transform.position.x + x, transform.position.y, transform.position.z + z);

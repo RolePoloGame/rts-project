@@ -1,4 +1,4 @@
 namespace RTS.Core
 {
-    public delegate void TickRateChangeEvent(ETickRate oldRate, ETickRate newRate);
+    public delegate void TickRateChangeEvent(float oldRate, float newRate);
 }

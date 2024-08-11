@@ -2,9 +2,9 @@ namespace RTS.Core
 {
     public enum ETickRate
     {
-        Pause,
-        Normal,
-        Double,
-        Tripple
+        Pause = 0,
+        Normal = 1,
+        Double = 2,
+        Tripple = 3
     }
 }

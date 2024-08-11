@@ -18,5 +18,7 @@ namespace RTS.Core
 
         [field: SerializeField, ReadOnly]
         public string ID { get; set; }
+
+        public override string ToString() => ID;
     }
 }

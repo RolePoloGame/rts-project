@@ -9,11 +9,16 @@ namespace RTS.Core
             return 1 / (1 + Mathf.Exp((x * -6 * easeStrength) + 2 * easeStrength));
         }
 
+        /// <summary>
+        /// https://easings.net/
+        /// </summary>
         public static float SineEaseInOut(float x)
         {
             return -(Mathf.Cos(Mathf.PI * x) - 1) / 2;
         }
-
+        /// <summary>
+        /// https://easings.net/
+        /// </summary>
         public static float EaseInOutBack(float x)
         {
             const float c1 = 1.70158f;
