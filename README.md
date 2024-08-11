@@ -30,6 +30,7 @@ The project demonstrates a basic RTS game where agents are spawned and managed a
 - **TextMeshPro:** For improved quality of fonts.
 - **Astarpathfinding Free:** For pathfinding and obstacle avoidance.
 - **DoTween:** For moving agents.
+- **Basic Motions Free:** For agent animations.
 
 ## Planned Features
 
@@ -44,5 +45,7 @@ The project demonstrates a basic RTS game where agents are spawned and managed a
 - [Space Robot Kyle URP](https://assetstore.unity.com/packages/3d/characters/robots/space-robot-kyle-urp-4696)
 - [DOTween](http://dotween.demigiant.com/index.php)
 - [A* Pathfinding Project](https://arongranberg.com/astar/download)
+- [A* Pathfinding Project](https://arongranberg.com/astar/download)
+- [Basic Motions Free](https://assetstore.unity.com/packages/3d/animations/basic-motions-free-154271)
 
 This README provides an overview of the project, including the tasks completed and packages used. The project aims to demonstrate proficiency in Unity and adherence to task specifications while showcasing the ability to incorporate advanced features for enhanced gameplay experience.
