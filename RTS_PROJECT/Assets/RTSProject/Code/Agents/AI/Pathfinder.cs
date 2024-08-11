@@ -22,12 +22,17 @@ namespace RTS.Agents
 
         private List<Vector3> currentPath;
         private Vector3 nextPos;
-
         private Tweener moveTween;
         private Tweener rotateTween;
         private bool movementStarts;
         private bool movementStops;
+        [SerializeField]
+        private float velocity;
+        [SerializeField]
+        private float maxVelocity;
 
+        public float Velocity => velocity;
+        public float MaxVelocity => maxVelocity;
         public bool ReachedDestination => reachedDestination;
 
         public event Action OnArrvied;
@@ -45,6 +50,7 @@ namespace RTS.Agents
             if (!RandomMovement) return;
             SearchForPath();
         }
+
         private void OnDestroy()
         {
             if (moveTween != null) moveTween.Kill();
@@ -78,12 +84,14 @@ namespace RTS.Agents
 
         private void UpdateMoveTweeen()
         {
-            var distance = Vector3.Distance(nextPos, transform.position);
+            var originalDistance = Vector3.Distance(nextPos, transform.position);
             if (moveTween != null) moveTween.Kill();
             float angularDeceleration = GetAngularDecelerationRate();
             var speed = MovementSpeed * speedFactor;
-            distance += distance * angularDeceleration / RotationSpeed;
+            var distance = originalDistance + originalDistance * angularDeceleration / RotationSpeed;
             float duration = distance / speed;
+            velocity = distance / duration;
+            maxVelocity = originalDistance / MovementSpeed * speedFactor;
             moveTween = transform.DOMove(nextPos, duration).SetEase(GetEase());
         }
         private float GetAngularDecelerationRate()
