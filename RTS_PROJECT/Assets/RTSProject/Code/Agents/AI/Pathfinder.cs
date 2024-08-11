@@ -14,7 +14,9 @@ namespace RTS.Agents
         [field: SerializeField] public float MovementSpeed { get; set; } = 1.0f;
         [field: SerializeField] public float RotationSpeed { get; set; } = 1.0f;
         [field: SerializeField] public bool RandomMovement { get; set; } = false;
+        [field: SerializeField] public float DelayBetweenRandom { get; set; } = 5.0f;
 
+        private float timer = 0.0f;
         private bool waitingForPathCalculation = false;
         private bool hasPath = false;
         private bool reachedDestination;
@@ -48,7 +50,15 @@ namespace RTS.Agents
 
             if (waitingForPathCalculation) return;
             if (!RandomMovement) return;
+            if (!HandleTimer()) return;
             SearchForPath();
+        }
+
+        private bool HandleTimer()
+        {
+            if (timer <= float.Epsilon) return true;
+            timer -= Time.deltaTime * speedFactor;
+            return timer <= float.Epsilon;
         }
 
         private void OnDestroy()
@@ -63,6 +73,8 @@ namespace RTS.Agents
             {
                 OnArrvied?.Invoke();
                 hasPath = false;
+                velocity = 0.0f;
+                maxVelocity = 0.0f;
                 return;
             }
             nextPos = currentPath.Dequeue();
@@ -155,6 +167,7 @@ namespace RTS.Agents
 
             currentPath = p.vectorPath;
             movementStarts = true;
+            timer = DelayBetweenRandom;
             hasPath = true;
         }
 
