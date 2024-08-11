@@ -21,13 +21,18 @@ namespace RTS.Agents
         public override void Initialize()
         {
             base.Initialize();
-            RegisterService();
-            ServiceManager.Get<ITickService>().OnTickChanged += SetTickSpeed;
+            RegisterService(); 
+
+            ITickService tickService = ServiceManager.Get<ITickService>();
+            if (tickService != null)
+                tickService.OnTickChanged += SetTickSpeed;
         }
         private void OnDestroy()
         {
             RemoveService();
-            ServiceManager.Get<ITickService>().OnTickChanged -= SetTickSpeed;
+            ITickService tickService = ServiceManager.Get<ITickService>();
+            if (tickService != null)
+                tickService.OnTickChanged -= SetTickSpeed;
         }
 
         protected virtual void HandleAgentRemove(UniqueID entityID)
@@ -35,7 +40,8 @@ namespace RTS.Agents
             if (!spawnedAgents.ContainsKey(entityID)) return;
             var agent = spawnedAgents[entityID];
             spawnedAgents.Remove(entityID);
-            Destroy(agent.gameObject);
+            DestroyImmediate(agent.gameObject);
+            OnAgentRemoved?.Invoke(entityID);
             //ToDo: Pooling
         }
 
@@ -80,12 +86,6 @@ namespace RTS.Agents
                 entityID = spawnedAgents.Keys.ToList()[index];
             }
             HandleAgentRemove(entityID);
-            OnAgentRemoved?.Invoke(entityID);
-        }
-        public void RequestRemoveAllAgents(UniqueID entityID)
-        {
-            HandleAgentRemove(entityID);
-            OnAgentRemoved?.Invoke(entityID);
         }
         public void RequestSpawnAgent()
         {
@@ -96,9 +96,9 @@ namespace RTS.Agents
         public void RequestRemoveAllAgents()
         {
             var agents = spawnedAgents.Keys.ToList();
-            spawnedAgents.Clear();
-            while (agents.Count > 0)
-                HandleAgentRemove(agents.Dequeue());
+            var agentsCount = agents.Count;
+            for (var i = 0; i < agentsCount; i++)
+                RequestRemoveAgent(agents[i]);
         }
         #endregion
     }

@@ -9,13 +9,9 @@ namespace RTS.UI
     public class AgentInfoUIView : ServiceUIView<IAgentService>
     {
         [SerializeField] private TextMeshProUGUI amountTMP;
-
-
         [SerializeField] private Dictionary<UniqueID, AgentUIElement> infoList = new();
         [SerializeField] private AgentUIElement elementPrefab;
         [SerializeField] private Transform root;
-
-
         private ObjectPool<AgentUIElement> pool;
 
         private void OnEnable()
@@ -33,6 +29,7 @@ namespace RTS.UI
 
         private void OnDisable()
         {
+            if (service == null) return;
             service.OnAgentSpawned -= OnAgentSpawned;
             service.OnAgentRemoved -= OnAgentRemoved;
             service.OnAgentArrived -= OnAgentArrived;
@@ -40,16 +37,16 @@ namespace RTS.UI
 
         private void OnAgentSpawned(UniqueID id)
         {
-            SpawnNotice($"[{id}] was added");
+            SpawnNotice($"[{id}] {("was added").Color(Color.green)}");
             UpdateLabel();
         }
 
         private void UpdateLabel() => amountTMP.SetText(service.AgentCount.ToString());
 
-        private void OnAgentArrived(UniqueID id) => SpawnNotice($"[{id}] arrived at destination");
+        private void OnAgentArrived(UniqueID id) => SpawnNotice($"[{id}] {("arrived").Color(Color.cyan)}");
         private void OnAgentRemoved(UniqueID id)
         {
-            SpawnNotice($"[{id}] was removed");
+            SpawnNotice($"[{id}] {("was removed").Color(Color.red)}");
             UpdateLabel();
         }
 
@@ -63,6 +60,7 @@ namespace RTS.UI
 
         private void Item_OnAgentFadeComplete(AgentUIElement obj)
         {
+            obj.OnAgentFadeComplete -= Item_OnAgentFadeComplete;
             pool.Release(obj);
             obj.gameObject.SetActive(false);
         }
