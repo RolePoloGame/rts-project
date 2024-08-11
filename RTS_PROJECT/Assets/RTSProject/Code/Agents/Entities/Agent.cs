@@ -6,6 +6,7 @@ namespace RTS.Agents
 {
     public class Agent : MovingEntity
     {
+        public Pathfinder Pathfinder => pathfinder;
         [SerializeField] private Pathfinder pathfinder;
 
         public Action<UniqueID> OnArrived { get; internal set; }
